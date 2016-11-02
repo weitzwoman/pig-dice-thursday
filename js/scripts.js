@@ -61,6 +61,9 @@ $(document).ready(function() {
     $("#player1score").text(game.player1);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
+    $("#player1Buttons").hide();
+    $("#player2Buttons").show();
+
   });
 
   $("#player2roll").click(function() {
@@ -78,6 +81,9 @@ $(document).ready(function() {
     $("#player2score").text(game.player2);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
+    $("#player2Buttons").hide();
+    $("#player1Buttons").show();
+
   });
 
   $("#winner").append(gameWinner());
