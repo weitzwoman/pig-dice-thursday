@@ -5,11 +5,19 @@ function Pig(player1, player2, currentScore, activePlayer) {
   this.currentScore = 0;
   this.activePlayer = 1;
 }
+var game = new Pig();
 
 function diceRoll() {
   var roll = Math.floor(Math.random() * 6) + 1;
+  if (roll === 1) {
+    game.currentScore = 0;
+  }
+  else {
+    game.currentScore += roll;
+  }
   return roll;
 }
+
 
 //UI
 $(document).ready(function() {
@@ -19,6 +27,8 @@ $(document).ready(function() {
 
     var newRoll = diceRoll();
     $("#diceSingleRollTotal").text(newRoll);
+    var turnRolltotal = (game.currentScore);
+    $("#diceRollTurnTotal").text(turnRolltotal)
 
   });
   $("form#player1").click(function(event) {
