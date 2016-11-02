@@ -35,6 +35,14 @@ Pig.prototype.hold = function(hold) {
   game.currentScore = 0;
 }
 
+function gameWinner() {
+  if (game.player1 >= 100) {
+  return "Player 1 is the Winner!";
+  } else if (game.player2 >= 100) {
+  return "Player 2 is the Winner!";
+  }
+}
+
 //UI
 $(document).ready(function() {
 
@@ -49,7 +57,7 @@ $(document).ready(function() {
 
   $("#player1hold").click(function() {
     game.hold();
-    var turnRolltotal = (game.currentScore);
+    // var turnRolltotal = (game.currentScore);
     $("#player1score").text(game.player1);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
@@ -66,9 +74,13 @@ $(document).ready(function() {
 
   $("#player2hold").click(function() {
     game.hold();
-    var turnRolltotal = (game.currentScore);
+    // var turnRolltotal = (game.currentScore);
     $("#player2score").text(game.player2);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
   });
+
+  $("#winner").append(gameWinner());
+
+
 });
