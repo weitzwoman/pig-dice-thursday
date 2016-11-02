@@ -1,0 +1,13 @@
+.well {
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.jumbotron {
+  text-align: center;
+  background-image: url(../img/pigdice.jpeg);
+  background-size: cover;
+}

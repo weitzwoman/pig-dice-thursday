@@ -12,10 +12,11 @@
       <div class="jumbotron">
         <h1>Pig Dice!</h1>
       </div>
+
       <div class="row">
         <div class="col-md-4">
-          <h2>Player 1</h2>
-          <div id="player1">
+          <div id="player1" class="well">
+            <h2>Player 1</h2>
             <h3>Score: <span id="player1score"></span></h3>
             <div id="player1Buttons">
               <button type="submit" class="btn btn-info" id="player1roll">Dice Roll!</button>
@@ -25,18 +26,18 @@
         </div>
 
         <div class="col-md-4">
-          <h3>Roll Number: <span id="diceRollTurnNumber"></span></h3>
-          <h3>Dice Roll: <span id="diceSingleRollTotal"></span></h3>
-          <h3>Turn Score: <span id="diceRollTurnTotal"></span></h3>
-          <div class="winner">
-            <h2 id="winner"></h2>
+          <div class="well">
+            <h3>Dice Roll: <span id="diceSingleRollTotal"></span></h3>
+            <h3>Turn Score: <span id="diceRollTurnTotal"></span></h3>
+            <div class="winner">
+              <h2 id="winner"></h2>
+            </div>
           </div>
         </div>
 
-
         <div class="col-md-4">
-          <h2>Player 2</h2>
-          <div id="player2">
+          <div id="player2" class="well">
+            <h2>Player 2</h2>
             <h3>Score: <span id="player2score"></span></h3>
             <div id="player2Buttons">
               <button type="submit" class="btn btn-info" id="player2roll">Roll Dice!</button>
@@ -44,6 +45,19 @@
             </div>
           </div>
         </div>
+
+      </div>
+
+      <div>
+        <h4>Directions:</h4>
+        <p>Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":</p>
+        <ul>
+          <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
+          <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
+          <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+        </ul>
+        <p>The first player to score 100 or more points wins.</p>
+      </div>
 
     </div>
   </body>
