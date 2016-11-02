@@ -31,10 +31,14 @@ $(document).ready(function() {
     $("#diceRollTurnTotal").text(turnRolltotal)
 
   });
-  $("form#player1").click(function(event) {
-    event.preventDefault();
+  $("#player2").click(function() {
     var player2DiceRollInput = $("#player2roll").val();
     var player2DiceHoldInput = $("#player2hold").val();
+
+    var newRoll = diceRoll();
+    $("#diceSingleRollTotal").text(newRoll);
+    var turnRolltotal = (game.currentScore);
+    $("#diceRollTurnTotal").text(turnRolltotal)
 
   });
 });
