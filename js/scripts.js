@@ -33,18 +33,14 @@ function switchActivePlayer() {
 Pig.prototype.hold = function(hold) {
   switchActivePlayer();
   game.currentScore = 0;
-  // this.currentScore += diceRoll();
 }
-
 
 //UI
 $(document).ready(function() {
 
-
   $("#player1roll").click(function() {
     var player1DiceRollInput = $("#player1roll").val();
     var player1DiceHoldInput = $("#player1hold").val();
-
     var newRoll = diceRoll();
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (game.currentScore);
@@ -55,13 +51,13 @@ $(document).ready(function() {
     game.hold();
     var turnRolltotal = (game.currentScore);
     $("#player1score").text(game.player1);
-    $("#diceRollTurnTotal").text("0")
+    $("#diceRollTurnTotal").text("0");
+    $("#diceSingleRollTotal").text("");
   });
 
   $("#player2roll").click(function() {
     var player2DiceRollInput = $("#player2roll").val();
     var player2DiceHoldInput = $("#player2hold").val();
-
     var newRoll = diceRoll();
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (game.currentScore);
@@ -69,8 +65,10 @@ $(document).ready(function() {
   });
 
   $("#player2hold").click(function() {
-    var player2hold = (this.hold);
+    game.hold();
     var turnRolltotal = (game.currentScore);
-    $("#player2score").text(turnRolltotal);
+    $("#player2score").text(game.player2);
+    $("#diceRollTurnTotal").text("0");
+    $("#diceSingleRollTotal").text("");
   });
 });
