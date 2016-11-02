@@ -11,11 +11,27 @@ function diceRoll() {
   var roll = Math.floor(Math.random() * 6) + 1;
   if (roll === 1) {
     game.currentScore = 0;
+    this.switchActivePlayer();
   }
   else {
     game.currentScore += roll;
   }
   return roll;
+}
+
+function switchActivePlayer() {
+  if (this.activePlayer === 1){
+    game.player1 += game.currentScore;
+    game.activePlayer = 2;
+  }else{
+    game.player2 += game.currentScore;
+    game.activePlayer = 1;
+  }
+}
+
+function hold(){
+  game.switchActivePlayer();
+  game.currentScore = 0;
 }
 
 
@@ -30,6 +46,11 @@ $(document).ready(function() {
     var turnRolltotal = (game.currentScore);
     $("#diceRollTurnTotal").text(turnRolltotal)
 
+    $("#player1hold").click(function() {
+      var player1hold = (game.hold);
+      $("#player1score").text(turnRolltotal);
+    });
+
   });
   $("#player2").click(function() {
     var player2DiceRollInput = $("#player2roll").val();
@@ -39,6 +60,13 @@ $(document).ready(function() {
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (game.currentScore);
     $("#diceRollTurnTotal").text(turnRolltotal)
+
+    $("#player2hold").click(function() {
+      var player2hold = (game.hold);
+      $("#player2score").text(turnRolltotal);
+    });
+
+    var holdTurn = hold();
 
   });
 });
