@@ -5,6 +5,7 @@ function Pig(player1, player2, currentScore, activePlayer) {
   this.currentScore = 0;
   this.activePlayer = 1;
 }
+
 var game = new Pig();
 
 function diceRoll() {
@@ -20,7 +21,7 @@ function diceRoll() {
 }
 
 function switchActivePlayer() {
-  if (this.activePlayer === 1){
+  if (game.activePlayer === 1){
     game.player1 += game.currentScore;
     game.activePlayer = 2;
   }else{
@@ -29,15 +30,18 @@ function switchActivePlayer() {
   }
 }
 
-function hold(){
-  game.switchActivePlayer();
+Pig.prototype.hold = function(hold) {
+  switchActivePlayer();
   game.currentScore = 0;
+  // this.currentScore += diceRoll();
 }
 
 
 //UI
 $(document).ready(function() {
-  $("#player1").click(function() {
+
+
+  $("#player1roll").click(function() {
     var player1DiceRollInput = $("#player1roll").val();
     var player1DiceHoldInput = $("#player1hold").val();
 
@@ -45,14 +49,16 @@ $(document).ready(function() {
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (game.currentScore);
     $("#diceRollTurnTotal").text(turnRolltotal)
-
-    $("#player1hold").click(function() {
-      var player1hold = (game.hold);
-      $("#player1score").text(turnRolltotal);
-    });
-
   });
-  $("#player2").click(function() {
+
+  $("#player1hold").click(function() {
+    game.hold();
+    var turnRolltotal = (game.currentScore);
+    $("#player1score").text(game.player1);
+    $("#diceRollTurnTotal").text("0")
+  });
+
+  $("#player2roll").click(function() {
     var player2DiceRollInput = $("#player2roll").val();
     var player2DiceHoldInput = $("#player2hold").val();
 
@@ -60,13 +66,11 @@ $(document).ready(function() {
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (game.currentScore);
     $("#diceRollTurnTotal").text(turnRolltotal)
+  });
 
-    $("#player2hold").click(function() {
-      var player2hold = (game.hold);
-      $("#player2score").text(turnRolltotal);
-    });
-
-    var holdTurn = hold();
-
+  $("#player2hold").click(function() {
+    var player2hold = (this.hold);
+    var turnRolltotal = (game.currentScore);
+    $("#player2score").text(turnRolltotal);
   });
 });
