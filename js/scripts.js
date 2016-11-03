@@ -9,7 +9,8 @@ Player.prototype.diceRoll = function() {
   var roll = Math.floor(Math.random() * 6) + 1;
   if (roll === 1) {
     this.currentScore = 0;
-    this.isTurn = false;
+    $("#player1Buttons").toggle();
+    $("#player2Buttons").toggle();
   }
   else {
     this.currentScore += roll;
@@ -17,18 +18,10 @@ Player.prototype.diceRoll = function() {
   return roll;
 }
 
-Player.prototype.switchActivePlayer = function() {
-  // this.currentScore = 0;
-  if (this.isTurn === true) {
-    this.isTurn = false;
-  }
-}
 
 Player.prototype.hold = function() {
-  //var playerTotalScore = this.totalScore + this.currentScore;
-  this.totalScore + this.currentScore;
+  this.totalScore = this.totalScore + this.currentScore;
   this.isTurn = true;
-  //this.currentScore = 0;
 }
 
 //UI
@@ -37,8 +30,6 @@ $(document).ready(function() {
   var player1 = new Player(0, 0, "");
   var player2 = new Player(0, 0, "");
   $("#player1roll").click(function() {
-    // var player1DiceRollInput = $("#player1roll").val();
-    // var player1DiceHoldInput = $("#player1hold").val();
     var newRoll = player1.diceRoll();
     $("#diceSingleRollTotal").text(newRoll);
     var turnRolltotal = (player1.currentScore);
@@ -46,13 +37,13 @@ $(document).ready(function() {
   });
 
   $("#player1hold").click(function() {
-    var saveScore = player1.hold();
-    $("#player1score").text(saveScore);
-    //saveScore
+    player1.hold();
+    $("#player1score").text(player1.totalScore);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
     $("#player1Buttons").hide();
     $("#player2Buttons").show();
+    console.log(player1.totalScore)
   });
 
   $("#player2roll").click(function() {
@@ -63,9 +54,8 @@ $(document).ready(function() {
   });
 
   $("#player2hold").click(function() {
-    var saveScore = player2.hold();
-    $("#player2score").text(saveScore);
-    // player2.switchActivePlayer();
+    player2.hold();
+    $("#player2score").text(player2.totalScore);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
     $("#player2Buttons").hide();
