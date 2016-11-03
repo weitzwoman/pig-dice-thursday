@@ -1,46 +1,29 @@
 // backend
-function Pig(player1, player2, currentScore, activePlayer) {
-  this.player1 = 0;
-  this.player2 = 0;
-  this.currentScore = 0;
-  this.activePlayer = 1;
+function Player(currentScore, totalScore) {
+  this.currentScore = currentScore;
+  this.totalScore = totalScore;
 }
 
-var game = new Pig();
+var player1 = new Player(0, 0);
+var player2 = new Player(0, 0);
 
-function diceRoll() {
+Player.prototype.diceRoll = function() {
   var roll = Math.floor(Math.random() * 6) + 1;
   if (roll === 1) {
-    game.currentScore = 0;
-    this.switchActivePlayer();
+    player1.currentScore = 0;
+    player2.currentScore = 0
   }
   else {
-    game.currentScore += roll;
+    player1.currentScore += roll;
+    player2.currentScore += roll;
   }
   return roll;
 }
 
-function switchActivePlayer() {
-  if (game.activePlayer === 1){
-    game.player1 += game.currentScore;
-    game.activePlayer = 2;
-  }else{
-    game.player2 += game.currentScore;
-    game.activePlayer = 1;
-  }
-}
 
-Pig.prototype.hold = function(hold) {
-  switchActivePlayer();
-  game.currentScore = 0;
-}
 
-function gameWinner() {
-  if (game.player1 >= 100) {
-  return "Player 1 is the Winner!";
-  } else if (game.player2 >= 100) {
-  return "Player 2 is the Winner!";
-  }
+Player.prototype.hold = function() {
+  return this.totalScore + this.currentScore;
 }
 
 //UI
@@ -49,44 +32,21 @@ $(document).ready(function() {
   $("#player1roll").click(function() {
     var player1DiceRollInput = $("#player1roll").val();
     var player1DiceHoldInput = $("#player1hold").val();
-    var newRoll = diceRoll();
+    var newRoll = Player.prototype.diceRoll();
     $("#diceSingleRollTotal").text(newRoll);
-    var turnRolltotal = (game.currentScore);
-    $("#diceRollTurnTotal").text(turnRolltotal)
+    var turnRolltotal = (player1.currentScore);
+    $("#diceRollTurnTotal").text(turnRolltotal);
+
+
   });
 
   $("#player1hold").click(function() {
-    game.hold();
-    // var turnRolltotal = (game.currentScore);
-    $("#player1score").text(game.player1);
+    // var saveScore = Player.prototype.hold(Player.totalScore);
+    // $("#player1score").text(saveScore);
     $("#diceRollTurnTotal").text("0");
     $("#diceSingleRollTotal").text("");
     $("#player1Buttons").hide();
     $("#player2Buttons").show();
 
   });
-
-  $("#player2roll").click(function() {
-    var player2DiceRollInput = $("#player2roll").val();
-    var player2DiceHoldInput = $("#player2hold").val();
-    var newRoll = diceRoll();
-    $("#diceSingleRollTotal").text(newRoll);
-    var turnRolltotal = (game.currentScore);
-    $("#diceRollTurnTotal").text(turnRolltotal)
-  });
-
-  $("#player2hold").click(function() {
-    game.hold();
-    // var turnRolltotal = (game.currentScore);
-    $("#player2score").text(game.player2);
-    $("#diceRollTurnTotal").text("0");
-    $("#diceSingleRollTotal").text("");
-    $("#player2Buttons").hide();
-    $("#player1Buttons").show();
-
-  });
-
-  $("#winner").append(gameWinner());
-
-
 });
